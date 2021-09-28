@@ -5,13 +5,17 @@ $run = <<"SCRIPT"
 echo ">>> Generating rpi image ... $@"
 export DEBIAN_FRONTEND=noninteractive
 export RPIGEN_DIR="${1:-/home/vagrant/rpi-gen}"
-export APT_PROXY='http://127.0.0.1:3142' 
+export APT_PROXY='http://127.0.0.1:3142'
 # Prepare
+cd /vagrant
+ls -la pi-gen/* </dev/null 2>&1 || (git submodule init; git submodule update)
 rsync -a --delete --exclude 'work' --exclude 'deploy' /vagrant/  ${RPIGEN_DIR}/
 cd ${RPIGEN_DIR}
-sudo ./clean.sh 
+ls -la pi-gen/* >/dev/null 2>&1 || (git submodule init; git submodule update)
+sudo ./clean.sh
+sed -i 's/nameserver\s.*$/nameserver 9.9.9.9/g' /etc/resolv.conf
 # Build
-sudo --preserve-env=APT_PROXY ./raspbian-cloud-build.sh
+time sudo --preserve-env=APT_PROXY ./raspbian-cloud-build.sh >raspbian-cloud-build.log 2>&1
 # Copy images back to server
 [ -d deploy ] && cp -vR deploy /vagrant/
 SCRIPT
@@ -19,12 +23,12 @@ SCRIPT
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.  
+  # please see the online documentation at vagrantup.com.
 
   config.vm.define :rpigen do |rpigen|
       # Every Vagrant virtual environment requires a box to build off of.
       #rpigen.vm.box = "ubuntu/xenial32"
-      rpigen.vm.box = "jriguera/rpibuilder-buster-10.0-i386"
+      rpigen.vm.box = "file://builds/buster-10.1_rpibuilder-4_virtualbox.box"
 
       # Create a forwarded port mapping which allows access to a specific port
       # within the machine from a port on the host machine. In the example below,

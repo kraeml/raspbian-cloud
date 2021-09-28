@@ -1,2 +1,0 @@
-[{{ .Data.betterclone.backups.rclone.id }}]
-{{ .Data.betterclone.backups.rclone.conf }}

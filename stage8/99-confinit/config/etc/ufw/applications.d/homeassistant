@@ -1,4 +1,0 @@
-[ha]
-title=Home Assistant
-description=Home Assistant
-ports=80,443/tcp

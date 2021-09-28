@@ -1,6 +1,6 @@
 # pi-gen options
 DEPLOY_ZIP=0
-IMG_NAME='RaspbianCloud'
+IMG_NAME='RaspbianRDF'
 
 # mender-convert
 if ls deploy/*optimized.img >/dev/null 2>&1

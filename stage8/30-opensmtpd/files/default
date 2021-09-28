@@ -1,3 +1,0 @@
-# Enable at startup
-SMTPD_ENABLED=1
-

@@ -1,0 +1,9 @@
+python3-pip
+build-essential
+curl
+cowsay
+expect
+git
+libffi-dev
+libssl-dev
+vim
