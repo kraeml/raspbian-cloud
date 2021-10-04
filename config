@@ -1,17 +1,37 @@
 # pi-gen options
-DEPLOY_ZIP=0
-IMG_NAME='RaspbianRDF'
 
-# mender-convert
-if ls deploy/*optimized.img >/dev/null 2>&1
-then
-    DEVICE_TYPE="raspberrypi3"
-    RAW_DISK_IMAGE="$(ls -c deploy/*optimized.img | head -n1)"
-    ARTIFACT_NAME="$(basename ${RAW_DISK_IMAGE%%.*})"
-    MENDER_DISK_IMAGE="${ARTIFACT_NAME}.sdimg"
-    MENDER_SERVER="https://hosted.mender.io"
-    TENANT_TOKEN="tokent"
-fi
+# Setting to 0 will deploy the actual image (.img)
+# instead of a zipped image (.zip).
+DEPLOY_ZIP=0
+
+# The name of the image to build with the current stage directories.
+IMG_NAME='RaspbianFTC'
+
+# The release version to build images against.
+# Valid values are jessie, stretch buster, bullseye, and testing.
+RELEASE='buster'
+
+# Defined later in the stages!
+TIMEZONE_DEFAULT='Europe/Berlin'
+FIRST_USER_NAME='pi'
+FIRST_USER_PASS="raspberry"
+
+# If set, then instead of working through the numeric stages in order,
+# this list will be followed.
+# For example setting to "stage0 stage1 mystage stage2" will run the
+# contents of mystage before stage2.
+# Note that quotes are needed around the list.
+# An absolute or relative path can be given for stages outside the
+# pi-gen directory.
+# STAGE_LIST=stage*
+
+# Instead of using traditional way of building the rootfs of every
+# stage in single subdirectories and copying over the previous one to
+# the next one, qcow2 based virtual disks with backing images are used
+# in every stage. This speeds up the build process and reduces overall
+# space consumption significantly.
+USE_QCOW2=1
+BASE_QCOW2_SIZE=25G
 
 # Generic
 export DEBIAN_FRONTEND=noninteractive

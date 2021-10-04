@@ -6,17 +6,23 @@ echo ">>> Generating rpi image ... $@"
 export DEBIAN_FRONTEND=noninteractive
 export RPIGEN_DIR="${1:-/home/vagrant/rpi-gen}"
 export APT_PROXY='http://127.0.0.1:3142'
+echo "deb http://ftp.de.debian.org/debian buster main" | sudo tee /etc/apt/sources.list.d/qemu.list
+apt-get update
+apt-get install --yes coreutils quilt parted qemu-user-static debootstrap zerofree zip \
+dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc \
+qemu-utils kpartx
+
 # Prepare
-cd /vagrant
-ls -la pi-gen/* </dev/null 2>&1 || (git submodule init; git submodule update)
-rsync -a --delete --exclude 'work' --exclude 'deploy' /vagrant/  ${RPIGEN_DIR}/
+echo "Prepare rpi-gen into vagrant home"
+rsync -a --delete --exclude 'backup' --exclude 'work' --exclude 'deploy' /vagrant/  ${RPIGEN_DIR}/
 cd ${RPIGEN_DIR}
-ls -la pi-gen/* >/dev/null 2>&1 || (git submodule init; git submodule update)
+echo "Clean up"
 sudo ./clean.sh
-sed -i 's/nameserver\s.*$/nameserver 9.9.9.9/g' /etc/resolv.conf
 # Build
-time sudo --preserve-env=APT_PROXY ./raspbian-cloud-build.sh >raspbian-cloud-build.log 2>&1
+echo "Build"
+time sudo --preserve-env=APT_PROXY ./build-all.sh
 # Copy images back to server
+echo "Copy images into host machine"
 [ -d deploy ] && cp -vR deploy /vagrant/
 SCRIPT
 
@@ -24,12 +30,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
+  # Taken from https://github.com/gantsign/development-environment/blob/master/Vagrantfile
+  required_plugins = %w[vagrant-disksize]
+  plugins_to_install = required_plugins.reject { |plugin| Vagrant.has_plugin? plugin }
+  unless plugins_to_install.empty?
+    puts "Installing plugins: #{plugins_to_install.join(' ')}"
+    if system "vagrant plugin install #{plugins_to_install.join(' ')}"
+      exec "vagrant #{ARGV.join(' ')}"
+    else
+      abort 'Installation of one or more plugins has failed. Aborting.'
+    end
+  end
 
   config.vm.define :rpigen do |rpigen|
       # Every Vagrant virtual environment requires a box to build off of.
       #rpigen.vm.box = "ubuntu/xenial32"
-      rpigen.vm.box = "file://builds/buster-10.1_rpibuilder-4_virtualbox.box"
-
+      rpigen.vm.box = "jriguera/rpibuilder-buster-10.2-i386"
+      rpigen.disksize.size = '50GB'
       # Create a forwarded port mapping which allows access to a specific port
       # within the machine from a port on the host machine. In the example below,
       # accessing "localhost:8080" will access port 80 on the guest machine.

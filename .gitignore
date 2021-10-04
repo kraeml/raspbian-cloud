@@ -1,3 +1,6 @@
 deploy/
 work/
 .vagrant/
+SKIP
+SKIP_IMAGES
+backup/
