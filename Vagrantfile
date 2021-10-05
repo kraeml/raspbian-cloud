@@ -12,9 +12,10 @@ apt-get install --yes coreutils quilt parted qemu-user-static debootstrap zerofr
 dosfstools libarchive-tools libcap2-bin grep rsync xz-utils file git curl bc \
 qemu-utils kpartx
 
-# Prepare
+# Prepare without NOOBS
 echo "Prepare rpi-gen into vagrant home"
-rsync -a --delete --exclude 'backup' --exclude 'work' --exclude 'deploy' /vagrant/  ${RPIGEN_DIR}/
+rsync -a --delete --exclude 'backup' --exclude 'work' --exclude 'deploy' \
+  --exclude 'EXPORT_NOOBS' /vagrant/  ${RPIGEN_DIR}/
 cd ${RPIGEN_DIR}
 echo "Clean up"
 sudo ./clean.sh
@@ -23,7 +24,7 @@ echo "Build"
 time sudo --preserve-env=APT_PROXY ./build-all.sh
 # Copy images back to server
 echo "Copy images into host machine"
-[ -d deploy ] && cp -vR deploy /vagrant/
+[ -d deploy ] && rsync -av --checksum deploy /vagrant/
 SCRIPT
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|

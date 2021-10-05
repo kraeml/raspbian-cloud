@@ -7,11 +7,11 @@ cd LCD-show/
 chmod +x LCD35B-show-V2
 sed -i "s/sudo reboot/#sudo reboot/g" LCD35B-show-V2
 sed -i "s/\"reboot now\"/\"not rebooting yet\"/g" LCD35B-show-V2
-./LCD35B-show-V2 lite
-cd ..
-rm -rf LCD-show
-ls ${ROOTFS_DIR}/boot/overlays/*.dtbo
-cat ${ROOTFS_DIR}/boot/config.txt
+#./LCD35B-show-V2 lite
+#cd ..
+#rm -rf LCD-show
+#ls ${ROOTFS_DIR}/boot/overlays/*.dtbo
+#cat ${ROOTFS_DIR}/boot/config.txt
 EOF
 
 # Install overlays for tft GPIO displays

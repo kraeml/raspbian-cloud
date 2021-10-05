@@ -5,7 +5,7 @@
 DEPLOY_ZIP=0
 
 # The name of the image to build with the current stage directories.
-IMG_NAME='RaspbianFTC'
+IMG_NAME='Costum-Raspbian'
 
 # The release version to build images against.
 # Valid values are jessie, stretch buster, bullseye, and testing.

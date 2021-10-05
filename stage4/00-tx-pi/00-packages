@@ -2,3 +2,27 @@ zip
 unzip
 wget
 build-essential
+
+# python RPi GPIO access
+python3-rpi.gpio
+
+# misc tools
+i2c-tools
+python3-smbus
+lighttpd
+git
+subversion
+ntpdate
+usbmount
+
+# avrdude
+avrdude
+
+# Install Beautiful Soup 4.x
+python3-bs4
+
+# install libroboint
+libusb-dev
+
+# fbgrab needs netpbm to generate png files
+netpbm
