@@ -1,0 +1,6 @@
+git
+cmake
+build-essential
+zip
+unzip
+wget

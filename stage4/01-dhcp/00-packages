@@ -1,0 +1,7 @@
+zip
+unzip
+wget
+build-essential
+
+# python RPi GPIO access
+python3-rpi.gpio

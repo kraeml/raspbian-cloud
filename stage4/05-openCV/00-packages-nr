@@ -1,0 +1,8 @@
+# Install OpenCV
+python3-opencv
+libzbar0
+python3-pil
+libzbar-dev
+
+# system wide mpg123 overrides the included mpg123 of some apps
+mpg123

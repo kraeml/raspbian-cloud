@@ -1,0 +1,7 @@
+# misc tools
+i2c-tools
+python3-smbus
+lighttpd
+git
+subversion
+ntpdate

@@ -1,0 +1,21 @@
+# X11
+xserver-xorg
+xinit
+xserver-xorg-video-fbdev
+xserver-xorg-legacy
+unclutter
+
+# python and pyqt
+python3
+python3-pyqt4
+python3-pip
+python3-numpy
+python3-dev
+cmake
+python3-pexpect
+
+# some additional python stuff
+python3-semantic-version
+python3-websockets
+python3-setuptools
+python3-wheel

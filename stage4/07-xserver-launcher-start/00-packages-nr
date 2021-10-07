@@ -1,0 +1,11 @@
+# Splash screen
+libjpeg-dev
+
+#
+# - Add TX-Pi TS-Cal
+#
+xinput-calibrator
+
+# install the BT Control Set server
+libbluetooth-dev
+libnetfilter-queue-dev
