@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 
 # Install overlays for tft GPIO displays
 install -m 755 -g root -o root  LCD-show/waveshare*.dtb ${ROOTFS_DIR}/boot/overlays/

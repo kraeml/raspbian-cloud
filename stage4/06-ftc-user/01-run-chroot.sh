@@ -1,6 +1,5 @@
 #!/bin/bash -e
 
-on_chroot << EOF
 echo 'Install tx-pi ftc user'
 
 # ----------------------- user setup ---------------------
@@ -51,4 +50,3 @@ cat <<EOF > /etc/sudoers.d/txpiconfig
 ftc     ALL = NOPASSWD: /opt/ftc/apps/system/txpiconfig/scripts/hostname, /opt/ftc/apps/system/txpiconfig/scripts/camera, /opt/ftc/apps/system/txpiconfig/scripts/ssh, /opt/ftc/apps/system/txpiconfig/scripts/x11vnc, /opt/ftc/apps/system/txpiconfig/scripts/display, /opt/ftc/apps/system/txpiconfig/scripts/i2cbus, /usr/bin/apt-get
 EOF
 chmod 0440 /etc/sudoers.d/txpiconfig
-EOF

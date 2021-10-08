@@ -3,9 +3,3 @@ avrdude
 
 # Install Beautiful Soup 4.x
 python3-bs4
-
-# install libroboint
-libusb-dev
-
-# fbgrab needs netpbm to generate png files
-netpbm

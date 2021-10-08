@@ -1,8 +1,5 @@
 #!/bin/bash -e
 
-# install -d -m 744 files/ ${ROOTFS_DIR}/tmp
-
-on_chroot << EOF
 echo 'Install tx-pi X Sever-launcher-start'
 
 # X server/launcher start
@@ -113,5 +110,4 @@ for f in /dev/input/by-id/*-mouse; do
 done
 
 exec /usr/bin/X -s 0 dpms \$CUROPT -nolisten tcp "\$@"
-EOF
 EOF

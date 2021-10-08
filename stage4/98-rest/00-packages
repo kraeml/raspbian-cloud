@@ -1,0 +1,5 @@
+# install libroboint
+libusb-dev
+
+# fbgrab needs netpbm to generate png files
+netpbm
