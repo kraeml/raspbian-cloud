@@ -252,7 +252,8 @@ sed -i 's.fbgrab.fbgrab -d /dev/fb1.' /var/www/screenshot.py
 # adjust file ownership for changed www user name
 chown -R ftc:ftc /var/www
 chown -R ftc:ftc /var/log/lighttpd
-chown -R ftc:ftc /var/run/lighttpd
+#Not working in pi-gen
+#chown -R ftc:ftc /var/run/lighttpd
 chown -R ftc:ftc /var/cache/lighttpd
 
 # In Buster, systemd (tmpfiles.d) resets the permissions to www-data if the

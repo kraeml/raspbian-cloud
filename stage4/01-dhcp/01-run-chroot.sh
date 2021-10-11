@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -eux
 
 echo 'Install tx-pi dhcp'
 echo Set hostname to tx-pi will done with cloud-init
