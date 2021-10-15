@@ -7,3 +7,4 @@ git
 libffi-dev
 libssl-dev
 vim
+screen

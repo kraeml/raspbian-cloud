@@ -111,3 +111,18 @@ done
 
 exec /usr/bin/X -s 0 dpms \$CUROPT -nolisten tcp "\$@"
 EOF
+
+# Install vnc server
+cat <<EOF > /etc/systemd/system/x11vnc.service
+[Unit]
+Description=X11 VNC service
+After=network.target
+[Service]
+ExecStart=/bin/su ftc -c "/usr/bin/x11vnc -forever"
+ExecStop=/bin/su ftc -c "/usr/bin/killall x11vnc"
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable x11vnc
