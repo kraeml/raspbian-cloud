@@ -2,6 +2,28 @@
 VAGRANTFILE_API_VERSION = "2"
 
 $run = <<"SCRIPT"
+# Disk setup
+if sudo sfdisk --list-free /dev/sda | grep Start
+then
+echo LVM extend to maximum size
+START_SEKTOR=$(sfdisk --list-free /dev/sda | tail -n 1 | cut -d ' ' -f 1)
+END_SEKTOR=$(sfdisk --list-free /dev/sda | tail -n 1 | cut -d ' ' -f 2)
+fdisk /dev/sda << FDISK_CMDS
+n
+p
+
+$START_SEKTOR
+
+t
+3
+8e
+w
+FDISK_CMDS
+vgextend rpibuilder-vg /dev/sda3
+lvm lvextend -l +100%FREE /dev/rpibuilder-vg/root
+resize2fs -p /dev/mapper/rpibuilder--vg-root
+fi
+
 echo ">>> Generating rpi image ... $@"
 export DEBIAN_FRONTEND=noninteractive
 export RPIGEN_DIR="${1:-/home/vagrant/rpi-gen}"
