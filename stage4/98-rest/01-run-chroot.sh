@@ -225,23 +225,23 @@ for i in /var/www/*.html /var/www/*.py; do
 done
 
 # add VNC and TX-Pi homepage link to index page
-sed -i 's#<center><a href="https://github.com/ftCommunity/ftcommunity-TXT" target="ft-community">community edition</a></center>#<center><a href="https://github.com/ftCommunity/ftcommunity-TXT" target="ft-community">ftcommunity</a> - <a href="https://www.tx-pi.de/" target="tx-pi">TX-Pi</a> - <a href="/remote">VNC</a></center>#' /var/www/index.html
+sed -i 's#<center><a href="https://github.com/ftCommunity/ftcommunity-TXT" target="ft-community">community edition</a></center>#<center><a href="https://github.com/ftCommunity/ftcommunity-TXT" target="ft-community">ftcommunity</a> - <a href="https://www.tx-pi.de/" target="tx-pi">TX-Pi</a> - <a href="http://tx-pi:6080/vnc.html?host=tx-pi\&port=6080">VNC</a></center>#' /var/www/index.html
 
 # Fav icon
 wget -N $LOCALGIT/favicon.ico
 
-# Install novnc ...
-cd /var/www
-wget -N $LOCALGIT/novnc.tgz
-tar xvfz novnc.tgz
-rm novnc.tgz
+## Install novnc ...
+#cd /var/www
+#wget -N $LOCALGIT/novnc.tgz
+#tar xvfz novnc.tgz
+#rm novnc.tgz
 
 
-# ... and websockify for novnc
-cd /opt/ftc
-wget -N $LOCALGIT/websockify.tgz
-tar xvfz websockify.tgz
-rm websockify.tgz
+## ... and websockify for novnc
+#cd /opt/ftc
+#wget -N $LOCALGIT/websockify.tgz
+#tar xvfz websockify.tgz
+#rm websockify.tgz
 
 # make sure fbgrab is there to take screenshots
 chown -R ftc:ftc /var/www

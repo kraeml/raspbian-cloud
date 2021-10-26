@@ -124,5 +124,20 @@ ExecStop=/bin/su ftc -c "/usr/bin/killall x11vnc"
 WantedBy=multi-user.target
 EOF
 
+cat <<EOF > /etc/systemd/system/novnc.service
+[Unit]
+Description=NoVNC service
+After=network.target
+PartOf=x11vnc.service
+Requires=x11vnc.service
+[Service]
+ExecStart=/bin/su ftc -c "/usr/share/novnc/utils/launch.sh --listen 6080 --vnc localhost:5900"
+ExecStop=/bin/su ftc -c "/usr/bin/killall launch.sh"
+[Install]
+WantedBy=multi-user.target
+EOF
+
+
 systemctl daemon-reload
 systemctl enable x11vnc
+systemctl enable novnc
