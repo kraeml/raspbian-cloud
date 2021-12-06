@@ -16,3 +16,5 @@ python3-texttable
 python3-websocket
 libffi-dev
 libssl-dev
+yamllint
+mosquitto-clients

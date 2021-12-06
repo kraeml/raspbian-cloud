@@ -8,7 +8,7 @@ then
 	curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 	echo "deb [arch=armhf] https://download.docker.com/linux/raspbian buster stable" | tee /etc/apt/sources.list.d/docker.list
 	apt-get update
-	pip3 install docker-compose
+	pip3 install docker-compose paho-mqtt
 	apt-get install --no-install-recommends docker-ce docker-ce-cli containerd.io
 	echo install bash completion for Docker CLI
 	curl -sSL -o /etc/bash_completion.d/docker \

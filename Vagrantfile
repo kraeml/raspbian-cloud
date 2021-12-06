@@ -69,7 +69,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       # Every Vagrant virtual environment requires a box to build off of.
       #rpigen.vm.box = "ubuntu/xenial32"
       rpigen.vm.box = "jriguera/rpibuilder-buster-10.2-i386"
-      rpigen.disksize.size = '50GB'
+      rpigen.disksize.size = '60GB'
       # Create a forwarded port mapping which allows access to a specific port
       # within the machine from a port on the host machine. In the example below,
       # accessing "localhost:8080" will access port 80 on the guest machine.
