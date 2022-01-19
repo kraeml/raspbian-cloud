@@ -6,6 +6,7 @@ git submodule update
 
 # Insert imagetool.sh as link
 [ ! -h ./imagetool.sh ] && ln -s pi-gen/imagetool.sh ./imagetool.sh
+[ ! -h ./raspbian-cloud-build.sh ] && ln -s pi-gen/raspbian-cloud-build.sh ./raspbian-cloud-build.sh
 pushd pi-gen
 git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
 git branch
